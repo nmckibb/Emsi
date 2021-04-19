@@ -95,7 +95,7 @@ def procJobFile(InputFile, dmos, conn, c):
     data = ast.literal_eval(i)
     #data = json.dumps(data)
     strBody = data["body"]
-    if bool(BeautifulSoup(strBody,"lxml.parser").find()):
+    if bool(BeautifulSoup(strBody,"html.parser").find()):
       strBody = BeautifulSoup(strBody,"lxml").txt
       numHTML+=1
     strTitle = data["title"]
@@ -108,7 +108,7 @@ def procJobFile(InputFile, dmos, conn, c):
     strSoc2 = "soc2"
     insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
     conn.commit()
-    print strSoc5
+    print (strSoc5)
   return numHTML
 
 
@@ -123,7 +123,7 @@ dmos= getOnetMap("map_onet_soc.csv")
 #dsh = getSocHierarchy("getSocHierarchy")
 
 #process job posting file
-print(procJobFile("sample",dmos,conn, c))
+print (procJobFile("sample", dmos, conn, c))
 #procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
 
 
