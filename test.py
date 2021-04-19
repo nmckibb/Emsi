@@ -28,44 +28,44 @@ if os.path.exists('mysqlEmsi.db'):
 conn = sqlite3.connect('mysqlEmsi.db')
 #  return conn
 
-def CreateTable():
-  c = conn.cursor()
+#def CreateTable():
+c = conn.cursor()
 
-  c.execute("""CREATE TABLE tblJobPosting (
-    body TEXT,
-    title TEXT,
-    expired DATE,
-    posted DATE,
-    state TEXT,
-    city TEXT,
-    onet TEXT,
-    soc5 TEXT,
-    soc2 TEXT
-    )""")
-
+c.execute("""CREATE TABLE tblJobPosting (
+  body TEXT,
+  title TEXT,
+  expired DATE,
+  posted DATE,
+  state TEXT,
+  city TEXT,
+  onet TEXT,
+  soc5 TEXT,
+  soc2 TEXT
+  )""")
+  
   c.execute("""CREATE TABLE tblonet_soc (
         onet TEXT,
         soc5 TEXT
         )""")
   conn.commit()
-  return c
+#return c
 
 
-def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+def insert_jobposting(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
     #print (strSQL)
     c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
-def get_posting(c):
-    strSQL ="""SELECT * FROM tblJobPosting"""
-    c.execute(strSQL)
-    return c.fetchall()
+def get_posting():
+  strSQL ="""SELECT * FROM tblJobPosting"""
+  c.execute(strSQL)
+  return c.fetchall()
 
 
-def insert_jobposting( c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
-    strSQL ="""INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
-    #print (strSQL)
-    c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
+# def insert_jobposting( c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+  # strSQL ="""INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+  # #print (strSQL)
+   # c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
 
 def findObject(self, attr, value):
@@ -93,7 +93,7 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
   
-def procJobFile(InputFile, dmos, c):
+def procJobFile(InputFile, dmos):
   # dimesion varible
   numHTML = 0
   # Opening JSON file
@@ -115,7 +115,7 @@ def procJobFile(InputFile, dmos, c):
     strOnet = data["onet"]
     strSoc5 = dmos[data["onet"]]
     strSoc2 = "soc2"
-    insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
+    insert_jobposting (strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
     conn.commit()
     #print (strSoc5)
   #return numHTML
@@ -182,7 +182,7 @@ for i in f:
             #i = i[:closg] + r'\"' + i[closg+1:]
 
 
-#procJobFile("sample", dmos, c)
+procJobFile("sample", dmos)
 
 print (numHTML)
 
