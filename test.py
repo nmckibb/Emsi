@@ -22,10 +22,10 @@ def getOnetMap(strFileName):
   return tdmos
 
 #def createDB (mydbfile):
-if os.path.exists(mydbfile):
-    os.remove(mydbfile)
+if os.path.exists('mysqlEmsi.db'):
+    os.remove('mysqlEmsi.db')
 
-conn = sqlite3.connect(mydbfile)
+conn = sqlite3.connect('mysqlEmsi.db')
 #  return conn
 
 def CreateTable():
