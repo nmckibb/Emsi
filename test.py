@@ -84,7 +84,7 @@ def getSocHierarchy(strFileName):
     # add in " : etc to place in dictionary
     if i[18]=='"':
       ti = '{"'+ i[0:7] +'": "'+ i[8:15] +'" ,"level": '+ i[16] +',"soc2_name": '+i[18:].strip()+'}'
-    else
+    else:
       ti = '{"'+ i[0:7] +'": "'+ i[8:15] +'" ,"level": '+ i[16] +',"soc2_name": "'+i[18:].strip()+'"}'
     # ingore heading row
     if "child" not in i:
