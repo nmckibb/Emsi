@@ -160,7 +160,7 @@ for i in f:
             strOnet = data["onet"]
             strSoc5 = dmos[data["onet"]]
             strSoc2 = "soc2"
-            insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+            insert_jobposting (strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
             #print BeautifulSoup(data["body"],"lxml").text
             #print (data["onet"])
             #print (dmos[data["onet"]]) # found soc5
