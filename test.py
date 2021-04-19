@@ -123,8 +123,9 @@ for i in f:
             strOnet = data["onet"]
             strSoc5 = dmos[data["onet"]]
             strSoc2 = "soc2"
-            insert_jobposting (c, strBody.strip(), strTitle.strip(), dtExpired.strip(), dtPosted.strip(),
-               strState.strip(), strCity.strip(), strOnet.strip(), strSoc5.strip(), strSoc2.strip())
+            #insert_jobposting (c, strBody.strip(), strTitle.strip(), dtExpired.strip(), dtPosted.strip(),
+            #   strState.strip(), strCity.strip(), strOnet.strip(), strSoc5.strip(), strSoc2.strip())
+            insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
             print strSoc5
             #print BeautifulSoup(data["body"],"lxml").text
             #print (data["onet"])
