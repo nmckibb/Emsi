@@ -138,48 +138,48 @@ dmos= getOnetMap("map_onet_soc.csv")
 # dimesion varible
 numHTML = 0
 # Opening JSON file
-f = open("sample", "r")
+#f = open("sample", "r")
   
 #print(f.readline())
-for i in f:
-  data = ast.literal_eval(i)
-  #data = json.dumps(data)
-  #while True:
-  try:
-            data = ast.literal_eval(i)
-            #data = json.dumps(i)
-            strBody  = data["body"]
-            if bool(BeautifulSoup(strBody,"html.parser").find()):
-              strBody = BeautifulSoup(strBody,"lxml").txt
-              numHTML+=1
-            strTitle = data["title"]
-            dtExpired = data["expired"]
-            dtPosted = data["posted"]
-            strState = data["state"]
-            strCity = data["city"]
-            strOnet = data["onet"]
-            strSoc5 = dmos[data["onet"]]
-            strSoc2 = "soc2"
-            insert_jobposting (strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
-            #print BeautifulSoup(data["body"],"lxml").text
-            #print (data["onet"])
-            #print (dmos[data["onet"]]) # found soc5
-            #print (json.dumps(data))
-            #data = json.load(i)
-            #result = json.loads(s)   # try to parse...
-#            break                    # parsing worked -> exit loop
-  except Exception as e:
-            # "Expecting , delimiter: line 34 column 54 (char 1158)"
-            # position of unexpected character after '"'
-            print (e)
-            print (re.findall(r'\(char(\d+)\)', str(e)))
-            #unexp = int(re.findall(r'\(char (\d+)\)', str(e))[0])
-            ## position of unescaped '"' before that
-            #unesc = i.rfind(r'"', 0, unexp)
-            #i = i[:unesc] + r'\"' + i[unesc+1:]
-            ## position of correspondig closing '"' (+2 for inserted '\')
-            #closg = i.find(r'"', unesc + 2)
-            #i = i[:closg] + r'\"' + i[closg+1:]
+# for i in f:
+  # data = ast.literal_eval(i)
+  # # data = json.dumps(data)
+  # # while True:
+  # try:
+            # data = ast.literal_eval(i)
+            # # data = json.dumps(i)
+            # strBody  = data["body"]
+            # if bool(BeautifulSoup(strBody,"html.parser").find()):
+              # strBody = BeautifulSoup(strBody,"lxml").txt
+              # numHTML+=1
+            # strTitle = data["title"]
+            # dtExpired = data["expired"]
+            # dtPosted = data["posted"]
+            # strState = data["state"]
+            # strCity = data["city"]
+            # strOnet = data["onet"]
+            # strSoc5 = dmos[data["onet"]]
+            # strSoc2 = "soc2"
+            # insert_jobposting (strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+            # # print BeautifulSoup(data["body"],"lxml").text
+            # # print (data["onet"])
+            # # print (dmos[data["onet"]]) # found soc5
+            # # print (json.dumps(data))
+            # # data = json.load(i)
+            # # result = json.loads(s)   # try to parse...
+           # # break                    # parsing worked -> exit loop
+  # except Exception as e:
+            # # "Expecting , delimiter: line 34 column 54 (char 1158)"
+            # # position of unexpected character after '"'
+            # print (e)
+            # print (re.findall(r'\(char(\d+)\)', str(e)))
+            # # unexp = int(re.findall(r'\(char (\d+)\)', str(e))[0])
+            # position of unescaped '"' before that
+            # # unesc = i.rfind(r'"', 0, unexp)
+            # # i = i[:unesc] + r'\"' + i[unesc+1:]
+            # position of correspondig closing '"' (+2 for inserted '\')
+            # # closg = i.find(r'"', unesc + 2)
+            # # i = i[:closg] + r'\"' + i[closg+1:]
 
 
 procJobFile("sample", dmos)
