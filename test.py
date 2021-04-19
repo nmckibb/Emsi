@@ -8,7 +8,7 @@ numHTML=0
 
 
 def getOnetMap(strFileName):
-  tdmos{}
+  tdmos = {}
   #setup map onet soc data dictionary
   osf = open(strFileName,"r")
   # process records
