@@ -182,7 +182,7 @@ for i in f:
             #i = i[:closg] + r'\"' + i[closg+1:]
 
 
-procJobFile("sample", dmos)
+#procJobFile("sample", dmos)
 
 print (numHTML)
 
