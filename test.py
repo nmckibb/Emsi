@@ -57,9 +57,13 @@ def CreateTable(conn):
 
 def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="""INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
-    print (strSQL)
+    #print (strSQL)
     c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
+def get_emps_by_name(conn, c):
+    strSQL ="""SELECT * FROM tblJobPosting"""
+    c.execute(strSQL)
+    return c.fetchall()
 
 
 def getSocHierarchy(strFileName):
@@ -141,7 +145,7 @@ for i in f:
             #i = i[:closg] + r'\"' + i[closg+1:]
 
 
-
+print get_emps_by_name(conn,c)
 print (numHTML)
 f.close()
 conn.close()
