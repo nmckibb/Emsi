@@ -138,7 +138,7 @@ numHTML = procJobFile("sample", dmos, conn, c)
 print (numHTML)
 
 conn.commit()
-print (get_posting(c))
+print (get_posting(c)[1])
 
 
 conn.close()
