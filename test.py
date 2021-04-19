@@ -102,9 +102,9 @@ def procJobFile(InputFile, dmos,conn, c):
       data = ast.literal_eval(i)
       #data = json.dumps(data)
       strBody = data["body"]
-      if bool(BeautifulSoup(strBody,"html.parser").find()):
-        strBody = BeautifulSoup(strBody,"lxml").txt
-        numHTML+=1
+      #if bool(BeautifulSoup(strBody,"html.parser").find()):
+      strBody = BeautifulSoup(strBody,"lxml").txt
+      numHTML+=1
       
       strTitle = data["title"]
       dtExpired = data["expired"]
