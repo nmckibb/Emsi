@@ -55,8 +55,9 @@ def CreateTable(conn):
   return c
 
 
-#def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
-#    c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+    c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+       (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
 
 
