@@ -146,7 +146,7 @@ for i in f:
             #closg = i.find(r'"', unesc + 2)
             #i = i[:closg] + r'\"' + i[closg+1:]
 
-
+conn.commit()
 print get_emps_by_name(c)[1]
 print (numHTML)
 f.close()
