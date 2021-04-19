@@ -156,7 +156,17 @@ for i in f:
   strOnet = data["onet"]
   strSoc5 = dmos[data["onet"]]
   strSoc2 = "soc2"
-  print (strBody.encode(), strTitle.encode(), dtExpired.encode(), dtPosted.encode(), strState.encode(), strCity.encode(), strOnet.encode(), strSoc5.encode(), strSoc2.encode())
+  print ("strBody " + type(strBody))
+  print ("strTitle " + type(strTitle))
+  print ("dtExpired " + type(dtExpired))
+  print ("dtExpired" + type(dtExpired))
+  print ("dtPosted " + type(dtPosted))
+  print ("strState " + type(strState))
+  print ("strCity " + type(strCity))
+  print ("strOnet " + type(strOnet))
+  print ("strSoc5 " + type(strSoc5))
+  print ("strSoc2 " + type(strSoc2))
+  
   #insert_jobposting(c, strBody.encode(), strTitle.encode(), dtExpired.encode(), dtPosted.encode(), strState.encode(), strCity.encode(), strOnet.encode(), strSoc5.encode(), strSoc2.encode())
   
   conn.commit()
