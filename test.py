@@ -129,6 +129,6 @@ print (procJobFile("sample", dmos, conn, c))
 
 conn.commit()
 print get_posting(c)[1]
-print (numHTML)
+
 f.close()
 conn.close()
