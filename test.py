@@ -87,6 +87,8 @@ def getSocHierarchy(strFileName):
   return tdmos
   
 def procJobFile(InputFile, dmos, conn, c):
+  # dimesion varible
+  numHTML = 0
   # Opening JSON file
   f = open(InputFile, "r")
   
