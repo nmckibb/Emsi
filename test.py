@@ -93,32 +93,32 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
   
-# def procJobFile(InputFile, dmos, conn, c):
-  # # dimesion varible
-  # numHTML = 0
-  # # Opening JSON file
-  # f = open(InputFile, "r")
+def procJobFile(InputFile, dmos, conn, c):
+  # dimesion varible
+  numHTML = 0
+  # Opening JSON file
+  f = open(InputFile, "r")
   
-  # #print(f.readline())
-  # for i in f:
-    # data = ast.literal_eval(i)
-    # #data = json.dumps(data)
-    # strBody = data["body"]
-    # if bool(BeautifulSoup(strBody,"html.parser").find()):
-      # strBody = BeautifulSoup(strBody,"lxml").txt
-      # numHTML+=1
-    # strTitle = data["title"]
-    # dtExpired = data["expired"]
-    # dtPosted = data["posted"]
-    # strState = data["state"]
-    # strCity = data["city"]
-    # strOnet = data["onet"]
-    # strSoc5 = dmos[data["onet"]]
-    # strSoc2 = "soc2"
-    # insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
-    # conn.commit()
-    # #print (strSoc5)
-  # return numHTML
+  #print(f.readline())
+  for i in f:
+    data = ast.literal_eval(i)
+    #data = json.dumps(data)
+    strBody = data["body"]
+    if bool(BeautifulSoup(strBody,"html.parser").find()):
+      strBody = BeautifulSoup(strBody,"lxml").txt
+      numHTML+=1
+    strTitle = data["title"]
+    dtExpired = data["expired"]
+    dtPosted = data["posted"]
+    strState = data["state"]
+    strCity = data["city"]
+    strOnet = data["onet"]
+    strSoc5 = dmos[data["onet"]]
+    strSoc2 = "soc2"
+    insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
+    conn.commit()
+    #print (strSoc5)
+  return numHTML
 
 
 # create db and tables
