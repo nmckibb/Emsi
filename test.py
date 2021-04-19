@@ -135,7 +135,7 @@ c = CreateTable(conn)
 dmos= getOnetMap("map_onet_soc.csv")
 
 #dictionary for Soc Hierarchy
-dsh = getSocHierarchy("getSocHierarchy")
+dsh = getSocHierarchy("../data_engineer_technical_project/soc_hierarchy.csv")
 
 #process job posting file
 #procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
