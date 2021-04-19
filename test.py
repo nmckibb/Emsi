@@ -144,44 +144,6 @@ f = open("sample", "r")
 for i in f:
   data = ast.literal_eval(i)
   #data = json.dumps(data)
-  strBody = data["body"]
-  if bool(BeautifulSoup(strBody,"html.parser").find()):
-    strBody = BeautifulSoup(strBody,"lxml").txt
-    numHTML+=1
-  strTitle = data["title"]
-  dtExpired = data["expired"]
-  dtPosted = data["posted"]
-  strState = data["state"]
-  strCity = data["city"]
-  strOnet = data["onet"]
-  strSoc5 = dmos[data["onet"]]
-  strSoc2 = "soc2"
-  print ("strBody ")
-  print (type(strBody))
-  print ("strTitle ")
-  print (type(strTitle))
-  print ("dtExpired ")
-  print (type(dtExpired))
-  print ("dtExpired")
-  print (type(dtExpired))
-  print ("dtPosted ")
-  print (type(dtPosted))
-  print ("strState ")
-  print (type(strState))
-  print ("strCity ")
-  print (type(strCity))
-  print ("strOnet ")
-  print (type(strOnet))
-  print ("strSoc5 ")
-  print (type(strSoc5))
-  print ("strSoc2 " )
-  print ( type(strSoc2))
-  
-  #insert_jobposting(c, strBody.encode(), strTitle.encode(), dtExpired.encode(), dtPosted.encode(), strState.encode(), strCity.encode(), strOnet.encode(), strSoc5.encode(), strSoc2.encode())
-  
-  conn.commit()
-  #print (strSoc5)
-
   #while True:
   try:
             data = ast.literal_eval(i)
@@ -198,7 +160,7 @@ for i in f:
             strOnet = data["onet"]
             strSoc5 = dmos[data["onet"]]
             strSoc2 = "soc2"
-            insert_jobposting (conn, c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+            insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
             #print BeautifulSoup(data["body"],"lxml").text
             #print (data["onet"])
             #print (dmos[data["onet"]]) # found soc5
