@@ -9,6 +9,23 @@ from sqlite3 import Error
 numHTML=0
 mydbfile='mysqlEmsi.db'
 
+
+def getOnetMap(strFileName):
+  tdmos = {}
+  #setup map onet soc data dictionary
+  osf = open(strFileName,"r")
+  # process records
+  for i in osf:
+    # split on , to prep for dictionary
+    lstx = i.split(",")
+    # add in " : etc to place in dictionary
+    ti = '{"'+lstx[0]+'": "'+lstx[1].strip()+'"}'
+    # ingore heading row
+    if "onet" not in i:
+      tdmos.update(ast.literal_eval(ti))
+  osf.close()
+  return tdmos
+
 def createDB (mydbfile):
   if os.path.exists(mydbfile):
     os.remove(mydbfile)
@@ -42,21 +59,7 @@ def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState,
   with conn:
     c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
    
-def getOnetMap(strFileName):
-  tdmos = {}
-  #setup map onet soc data dictionary
-  osf = open(strFileName,"r")
-  # process records
-  for i in osf:
-    # split on , to prep for dictionary
-    lstx = i.split(",")
-    # add in " : etc to place in dictionary
-    ti = '{"'+lstx[0]+'": "'+lstx[1].strip()+'"}'
-    # ingore heading row
-    if "onet" not in i:
-      tdmos.update(ast.literal_eval(ti))
-  osf.close()
-  return tdmos
+
 
 def getSocHierarchy(strFileName):
   tdmos = {}
