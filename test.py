@@ -125,7 +125,7 @@ dmos= getOnetMap("map_onet_soc.csv")
 #dsh = getSocHierarchy("getSocHierarchy")
 
 #process job posting file
-NumProc = procJobFile ("sample", dmos, conn, c)
+NumProc = procJobFile ("sample", dmos)
 #procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
 print (NumProc)
 
