@@ -48,7 +48,7 @@ def CreateTable(conn):
         soc5 TEXT
         )""")
   conn.commit()
-return c
+  return c
 
 
 def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
