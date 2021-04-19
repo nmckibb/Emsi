@@ -98,11 +98,10 @@ def procJobFile(InputFile, dmos,conn, c):
       data = ast.literal_eval(i)
       #data = json.dumps(data)
       strBody = data["body"]
-      print("before Soup")
       if bool(BeautifulSoup(strBody,"html.parser").find()):
         strBody = BeautifulSoup(strBody,"lxml").txt
         numHTML+=1
-      print("After Soup")
+      
       strTitle = data["title"]
       dtExpired = data["expired"]
       dtPosted = data["posted"]
@@ -111,7 +110,9 @@ def procJobFile(InputFile, dmos,conn, c):
       strOnet = data["onet"]
       strSoc5 = dmos[data["onet"]]
       strSoc2 = "soc2"
+      print ("Before")
       insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+      print("After")
       conn.commit()
     except Exception as e:
       print (i)
