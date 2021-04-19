@@ -123,7 +123,7 @@ def procJobFile(InputFile, dmos):
 
 # create db and tables
 #conn = createDB('mysqlEmsi.db')
-c = CreateTable()
+#c = CreateTable()
 
 #dictionary for mapping to soc5
 dmos= getOnetMap("map_onet_soc.csv")
