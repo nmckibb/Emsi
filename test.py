@@ -5,16 +5,6 @@ import json, ast, re, bs4, datetime, io
 from bs4 import BeautifulSoup
 
 numHTML=0
-#class clssoc:
-#    def _init_(self, child, parent,level,name):
-#        self.child = child
-#        self.parent = parent
-#        self.level = level
-#        self.name = name
-
-#    def
-
-
 
 #dimision empty dictionary
 dmos={}
