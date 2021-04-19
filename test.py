@@ -187,7 +187,7 @@ for i in f:
 print (numHTML)
 
 conn.commit()
-print get_posting()]
+print get_posting()
 
 f.close()
 conn.close()
