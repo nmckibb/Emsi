@@ -1,13 +1,64 @@
 #python program to read
 # json file
-
-import json, ast, re, bs4, datetime, io
+#import tools
+import json, ast, re, bs4, datetime, io, sqlite3, os
 from bs4 import BeautifulSoup
+from sqlite3 import Error
 
+# define Varibles 
 numHTML=0
+mydbfile='mysqlEmsi.db'
 
+def createDB (mydbfile):
+  if os.path.exists(mydbfile):
+    os.remove(mydbfile)
+
+  conn = sqlite3.connect(mydbfile)
+  return conn
+
+def CreateTable(conn):
+  c = conn.cursor()
+
+  c.execute("""CREATE TABLE tblJobPosting (
+    body TEXT,
+    title TEXT,
+    expired DATE,
+    posted DATE,
+    state TEXT,
+    city TEXT,
+    onet TEXT,
+    soc5 TEXT,
+    soc2 TEXT
+    )""")
+
+  c.execute("""CREATE TABLE tblonet_soc (
+        onet TEXT,
+        soc5 TEXT
+        )""")
+  conn.commit()
+  return c
+
+def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+  with conn:
+    c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
 
 def getOnetMap(strFileName):
+  tdmos = {}
+  #setup map onet soc data dictionary
+  osf = open(strFileName,"r")
+  # process records
+  for i in osf:
+    # split on , to prep for dictionary
+    lstx = i.split(",")
+    # add in " : etc to place in dictionary
+    ti = '{"'+lstx[0]+'": "'+lstx[1].strip()+'"}'
+    # ingore heading row
+    if "onet" not in i:
+      tdmos.update(ast.literal_eval(ti))
+  osf.close()
+  return tdmos
+
+def getSocHierarchy(strFileName):
   tdmos = {}
   #setup map onet soc data dictionary
   osf = open(strFileName,"r")
@@ -59,6 +110,8 @@ for i in f:
             strCity = data["city"]
             strOnet = data["onet"]
             strSoc5 = dmos[data["onet"]]
+            strSoc2 = "soc2"
+            insert_jobposting (conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
             #print BeautifulSoup(data["body"],"lxml").text
             #print (data["onet"])
             #print (dmos[data["onet"]]) # found soc5
@@ -79,6 +132,8 @@ for i in f:
             #closg = i.find(r'"', unesc + 2)
             #i = i[:closg] + r'\"' + i[closg+1:]
 
-f.close()
+
 
 print (numHTML)
+f.close()
+conn.close()
