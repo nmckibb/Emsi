@@ -120,7 +120,7 @@ c = CreateTable(conn)
 dmos= getOnetMap("map_onet_soc.csv")
 
 #dictionary for Soc Hierarchy
-dsh = getSocHierarchy("getSocHierarchy")
+#dsh = getSocHierarchy("getSocHierarchy")
 
 #process job posting file
 print(procJobFile("sample",dmos,conn, c))
