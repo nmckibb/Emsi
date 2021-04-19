@@ -117,7 +117,7 @@ def procJobFile(InputFile, dmos):
     strSoc2 = "soc2"
     insert_jobposting (strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
     conn.commit()
-    #print (strSoc5)
+    print (strSoc5)
   #return numHTML
 
 
@@ -182,7 +182,7 @@ for i in f:
             #i = i[:closg] + r'\"' + i[closg+1:]
 
 
-#procJobFile("sample", dmos)
+procJobFile("sample", dmos)
 
 print (numHTML)
 
