@@ -99,7 +99,6 @@ def procJobFile(InputFile, dmos):
   # Opening JSON file
   f = open(InputFile, "r")
   
-  #print(f.readline())
   for i in f:
     try:
       data = ast.literal_eval(i)
@@ -121,8 +120,9 @@ def procJobFile(InputFile, dmos):
     except Exception as e:
       print (i)
       print (e)
-    print (strSoc5)
-    f.close()
+  
+  print (strSoc5)
+  f.close()
   #return numHTML
 
 
