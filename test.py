@@ -75,6 +75,7 @@ def findObject(self, attr, value):
         return match
 
 def getSocHierarchy(strFileName):
+  #child,parent,level,name
   tdmos = {}
   #setup map onet soc data dictionary
   osf = open(strFileName,"r")
@@ -83,7 +84,7 @@ def getSocHierarchy(strFileName):
     # split on , to prep for dictionary
     lstx = i.split(",")
     # add in " : etc to place in dictionary
-    ti = '{"'+lstx[0]+'": "'+lstx[1].strip()+'"}'
+    ti = '{"'+lstx[0].strip() +'": "'+lstx[1].strip()+'" ,"level": '+lstx[2].strip() +'","name": "'+lstx[3].strip()+'"}'
     # ingore heading row
     if "child" not in i:
       tdmos.update(ast.literal_eval(ti))
@@ -134,7 +135,7 @@ c = CreateTable(conn)
 dmos= getOnetMap("map_onet_soc.csv")
 
 #dictionary for Soc Hierarchy
-#dsh = getSocHierarchy("getSocHierarchy")
+dsh = getSocHierarchy("getSocHierarchy")
 
 #process job posting file
 #procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
@@ -142,6 +143,7 @@ dmos= getOnetMap("map_onet_soc.csv")
 # dimesion varible
 numHTML = procJobFile("sample", dmos, conn, c)
 
+print (dsh)
 print (numHTML)
 
 conn.commit()
