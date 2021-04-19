@@ -21,14 +21,14 @@ def getOnetMap(strFileName):
   osf.close()
   return tdmos
 
-def createDB (mydbfile):
-  if os.path.exists(mydbfile):
+#def createDB (mydbfile):
+if os.path.exists(mydbfile):
     os.remove(mydbfile)
 
-  conn = sqlite3.connect(mydbfile)
-  return conn
+conn = sqlite3.connect(mydbfile)
+#  return conn
 
-def CreateTable(conn):
+def CreateTable():
   c = conn.cursor()
 
   c.execute("""CREATE TABLE tblJobPosting (
@@ -64,7 +64,7 @@ def get_posting(c):
 
 def insert_jobposting( c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="""INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
-    print (strSQL)
+    #print (strSQL)
     c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
 
@@ -93,7 +93,7 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
   
-def procJobFile(InputFile, dmos, conn, c):
+def procJobFile(InputFile, dmos, c):
   # dimesion varible
   numHTML = 0
   # Opening JSON file
@@ -122,8 +122,8 @@ def procJobFile(InputFile, dmos, conn, c):
 
 
 # create db and tables
-conn = createDB('mysqlEmsi.db')
-c = CreateTable(conn)
+#conn = createDB('mysqlEmsi.db')
+c = CreateTable()
 
 #dictionary for mapping to soc5
 dmos= getOnetMap("map_onet_soc.csv")
@@ -182,7 +182,7 @@ for i in f:
             #i = i[:closg] + r'\"' + i[closg+1:]
 
 
-procJobFile("sample", dmos, conn, c)
+procJobFile("sample", dmos, c)
 
 print (numHTML)
 
