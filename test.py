@@ -41,7 +41,7 @@ def CreateTable(conn):
 def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
   with conn:
     c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
-
+   
 def getOnetMap(strFileName):
   tdmos = {}
   #setup map onet soc data dictionary
