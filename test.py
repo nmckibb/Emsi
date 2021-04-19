@@ -55,12 +55,12 @@ def CreateTable(conn):
   return c
 
 
-def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="""INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
     #print (strSQL)
     c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
-def get_emps_by_name(conn, c):
+def get_emps_by_name(c):
     strSQL ="""SELECT * FROM tblJobPosting"""
     c.execute(strSQL)
     return c.fetchall()
@@ -123,7 +123,7 @@ for i in f:
             strOnet = data["onet"]
             strSoc5 = dmos[data["onet"]]
             strSoc2 = "soc2"
-            insert_jobposting (conn, c, strBody.strip(), strTitle.strip(), dtExpired.strip(), dtPosted.strip(),
+            insert_jobposting (c, strBody.strip(), strTitle.strip(), dtExpired.strip(), dtPosted.strip(),
                strState.strip(), strCity.strip(), strOnet.strip(), strSoc5.strip(), strSoc2.strip())
             print strSoc5
             #print BeautifulSoup(data["body"],"lxml").text
@@ -147,7 +147,7 @@ for i in f:
             #i = i[:closg] + r'\"' + i[closg+1:]
 
 
-print get_emps_by_name(conn,c)
+print get_emps_by_name(c)[1]
 print (numHTML)
 f.close()
 conn.close()
