@@ -82,7 +82,7 @@ def getSocHierarchy(strFileName):
   # process records
   for i in osf:
     # add in " : etc to place in dictionary
-    ti = '{"'+ i[0:7] +'": "'+ i[9:16] +'" ,"level": '+ i[18] +'","name": '+lstx[20:].strip()+'}'
+    ti = '{"'+ i[0:7] +'": "'+ i[9:16] +'" ,"level": '+ i[18] +'","name": '+i[20:].strip()+'}'
     # ingore heading row
     if "child" not in i:
       tdmos.update(ast.literal_eval(ti))
