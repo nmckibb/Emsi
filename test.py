@@ -86,7 +86,7 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
   
-def procJobFile(InputFile, dmos):
+def procJobFile(InputFile, dmos, conn, c):
   # dimesion varible
   numHTML = 0
   # Opening JSON file
@@ -125,7 +125,7 @@ dmos= getOnetMap("map_onet_soc.csv")
 #dsh = getSocHierarchy("getSocHierarchy")
 
 #process job posting file
-NumProc = procJobFile ("sample", dmos)
+NumProc = procJobFile ("sample", dmos, conn, c)
 #procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
 print (NumProc)
 
