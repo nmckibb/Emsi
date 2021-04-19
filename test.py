@@ -54,7 +54,11 @@ def CreateTable(conn):
 def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
     #print (strSQL)
-    c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
+    try:
+      c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
+    except Exception as e:
+      print (strOnet)
+      print(e)
 
 def get_posting(c):
   strSQL ="""SELECT * FROM tblJobPosting"""
@@ -110,9 +114,7 @@ def procJobFile(InputFile, dmos,conn, c):
       strOnet = data["onet"]
       strSoc5 = dmos[data["onet"]]
       strSoc2 = "soc2"
-      print ("Before")
       insert_jobposting (c, strBody.strip(), strTitle.strip(), dtExpired.strip(), dtPosted.strip(), strState.strip(), strCity.strip(), strOnet.strip(), strSoc5.strip(), strSoc2.strip())
-      print("After")
       conn.commit()
     except Exception as e:
       print (i)
