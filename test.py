@@ -43,11 +43,11 @@ c.execute("""CREATE TABLE tblJobPosting (
   soc2 TEXT
   )""")
   
-  c.execute("""CREATE TABLE tblonet_soc (
+c.execute("""CREATE TABLE tblonet_soc (
         onet TEXT,
         soc5 TEXT
         )""")
-  conn.commit()
+conn.commit()
 #return c
 
 
