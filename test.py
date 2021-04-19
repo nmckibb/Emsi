@@ -7,7 +7,6 @@ from sqlite3 import Error
 
 # define Varibles 
 numHTML=0
-mydbfile='mysqlEmsi.db'
 
 
 def getOnetMap(strFileName):
@@ -55,10 +54,10 @@ def CreateTable(conn):
   conn.commit()
   return c
 
-#def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
-#  with conn:
-#    c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
-   
+
+def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+    c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+
 
 
 def getSocHierarchy(strFileName):
@@ -77,7 +76,11 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
 
-#dimision empty dictionary for mapping to soc5
+# create db and tables
+conn = createDB('mysqlEmsi.db')
+c = CreateTable(conn)
+
+#dictionary for mapping to soc5
 dmos= getOnetMap("map_onet_soc.csv")
 
 # diminsion dictionary for soc_hiearchy
