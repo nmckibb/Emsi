@@ -5,10 +5,6 @@ import json, ast, re, bs4, datetime, io, sqlite3, os
 from bs4 import BeautifulSoup
 from sqlite3 import Error
 
-# define Varibles 
-numHTML=0
-
-
 def getOnetMap(strFileName):
   tdmos = {}
   #setup map onet soc data dictionary
@@ -60,11 +56,19 @@ def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCi
     #print (strSQL)
     c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
-def get_emps_by_name(c):
+def get_posting(c):
     strSQL ="""SELECT * FROM tblJobPosting"""
     c.execute(strSQL)
     return c.fetchall()
 
+def findObject(self, attr, value):
+  if getattr(self, attr) == value:
+    return self
+  else:
+    for child in self.children:
+      match = child.findObject(attr, value)
+      if match:
+        return match
 
 def getSocHierarchy(strFileName):
   tdmos = {}
@@ -77,10 +81,36 @@ def getSocHierarchy(strFileName):
     # add in " : etc to place in dictionary
     ti = '{"'+lstx[0]+'": "'+lstx[1].strip()+'"}'
     # ingore heading row
-    if "onet" not in i:
+    if "child" not in i:
       tdmos.update(ast.literal_eval(ti))
   osf.close()
   return tdmos
+  
+def procJobFile(InputFile, dmos, conn, c):
+  # Opening JSON file
+  f = open(InputFile, "r")
+  
+  #print(f.readline())
+  for i in f:
+    data = ast.literal_eval(i)
+    #data = json.dumps(data)
+    strBody = data["body"]
+    if bool(BeautifulSoup(strBody,"lxml.parser").find()):
+      strBody = BeautifulSoup(strBody,"lxml").txt
+      numHTML+=1
+    strTitle = data["title"]
+    dtExpired = data["expired"]
+    dtPosted = data["posted"]
+    strState = data["state"]
+    strCity = data["city"]
+    strOnet = data["onet"]
+    strSoc5 = dmos[data["onet"]]
+    strSoc2 = "soc2"
+    insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
+    conn.commit()
+    print strSoc5
+  return numHTML
+
 
 # create db and tables
 conn = createDB('mysqlEmsi.db')
@@ -89,66 +119,16 @@ c = CreateTable(conn)
 #dictionary for mapping to soc5
 dmos= getOnetMap("map_onet_soc.csv")
 
-# diminsion dictionary for soc_hiearchy
-#dsh={}
-#fsh = open("soc_hierarchy.csv","r")
-#for i in fsh:
-#    if "child" not in i:
+#dictionary for Soc Hierarchy
+dsh = getSocHierarchy("getSocHierarchy")
 
-  
+#process job posting file
+print(procJobFile("sample",dmos,conn, c))
+#procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
 
-# setup file for eaier changes
-
-InputFile="sample"
-#InputFile="../data_engineer_technical_project/sample"
-
-# Opening JSON file
-f = open(InputFile, "r")
-
-#print(f.readline())
-for i in f:
-  #while True:
-  try:
-            data = ast.literal_eval(i)
-            #data = json.dumps(i)
-            strBody  = data["body"]
-            if bool(BeautifulSoup(strBody,"html.parser").find()):
-              strBody = BeautifulSoup(strBody,"lxml").txt
-              numHTML+=1
-            strTitle = data["title"]
-            dtExpired = data["expired"]
-            dtPosted = data["posted"]
-            strState = data["state"]
-            strCity = data["city"]
-            strOnet = data["onet"]
-            strSoc5 = dmos[data["onet"]]
-            strSoc2 = "soc2"
-            #insert_jobposting (c, strBody.strip(), strTitle.strip(), dtExpired.strip(), dtPosted.strip(),
-            #   strState.strip(), strCity.strip(), strOnet.strip(), strSoc5.strip(), strSoc2.strip())
-            insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
-            print strSoc5
-            #print BeautifulSoup(data["body"],"lxml").text
-            #print (data["onet"])
-            #print (dmos[data["onet"]]) # found soc5
-            #print (json.dumps(data))
-            #data = json.load(i)
-            #result = json.loads(s)   # try to parse...
-#            break                    # parsing worked -> exit loop
-  except Exception as e:
-            # "Expecting , delimiter: line 34 column 54 (char 1158)"
-            # position of unexpected character after '"'
-            print (e)
-            print (re.findall(r'\(char(\d+)\)', str(e)))
-            #unexp = int(re.findall(r'\(char (\d+)\)', str(e))[0])
-            ## position of unescaped '"' before that
-            #unesc = i.rfind(r'"', 0, unexp)
-            #i = i[:unesc] + r'\"' + i[unesc+1:]
-            ## position of correspondig closing '"' (+2 for inserted '\')
-            #closg = i.find(r'"', unesc + 2)
-            #i = i[:closg] + r'\"' + i[closg+1:]
 
 conn.commit()
-print get_emps_by_name(c)[1]
+print get_posting(c)[1]
 print (numHTML)
 f.close()
 conn.close()
