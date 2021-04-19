@@ -92,7 +92,7 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
   
-def procJobFile(InputFile, dmos,conn, c):
+def procJobFile(InputFile, dmos,conn, c, dsh):
   # dimesion varible
   numHTML = 0
   # Opening JSON file
@@ -115,7 +115,7 @@ def procJobFile(InputFile, dmos,conn, c):
       strCity = data["city"]
       strOnet = data["onet"]
       strSoc5 = dmos[data["onet"]]
-      strSoc2 = "soc2"
+      strSoc2 = dsh[strSoc5]
       insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
       conn.commit()
     except Exception as e:
@@ -142,9 +142,9 @@ dsh = getSocHierarchy('../data_engineer_technical_project/soc_hierarchy.csv')
 #procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
 
 # dimesion varible
-numHTML = procJobFile("sample", dmos, conn, c)
+numHTML = procJobFile("sample", dmos, conn, c, dsh)
 
-print (dsh)
+#print (dsh)
 print (numHTML)
 
 conn.commit()
