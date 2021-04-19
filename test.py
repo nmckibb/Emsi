@@ -55,8 +55,8 @@ def CreateTable(conn):
   return c
 
 
-def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
-    c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+#def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+#    c.execute("INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
 
 
 
@@ -117,7 +117,7 @@ for i in f:
             strOnet = data["onet"]
             strSoc5 = dmos[data["onet"]]
             strSoc2 = "soc2"
-            insert_jobposting (conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+            #insert_jobposting (conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
             #print BeautifulSoup(data["body"],"lxml").text
             #print (data["onet"])
             #print (dmos[data["onet"]]) # found soc5
