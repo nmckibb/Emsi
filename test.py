@@ -51,6 +51,7 @@ def CreateTable(conn):
   return c
 
 
+<<<<<<< HEAD
 def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
     #print (strSQL)
@@ -60,6 +61,13 @@ def get_posting(c):
     strSQL ="""SELECT * FROM tblJobPosting"""
     c.execute(strSQL)
     return c.fetchall()
+=======
+def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+    strSQL ="""INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+    print (strSQL)
+    c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
+
+>>>>>>> parent of f3ef3f2 (Update test.py)
 
 def findObject(self, attr, value):
   if getattr(self, attr) == value:
@@ -135,6 +143,7 @@ f = open("sample", "r")
   
 #print(f.readline())
 for i in f:
+<<<<<<< HEAD
   data = ast.literal_eval(i)
   #data = json.dumps(data)
   strBody = data["body"]
@@ -153,6 +162,45 @@ for i in f:
   
   conn.commit()
   #print (strSoc5)
+=======
+  #while True:
+  try:
+            data = ast.literal_eval(i)
+            #data = json.dumps(i)
+            strBody  = data["body"]
+            if bool(BeautifulSoup(strBody,"html.parser").find()):
+              strBody = BeautifulSoup(strBody,"lxml").txt
+              numHTML+=1
+            strTitle = data["title"]
+            dtExpired = data["expired"]
+            dtPosted = data["posted"]
+            strState = data["state"]
+            strCity = data["city"]
+            strOnet = data["onet"]
+            strSoc5 = dmos[data["onet"]]
+            strSoc2 = "soc2"
+            insert_jobposting (conn, c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+            #print BeautifulSoup(data["body"],"lxml").text
+            #print (data["onet"])
+            #print (dmos[data["onet"]]) # found soc5
+            #print (json.dumps(data))
+            #data = json.load(i)
+            #result = json.loads(s)   # try to parse...
+#            break                    # parsing worked -> exit loop
+  except Exception as e:
+            # "Expecting , delimiter: line 34 column 54 (char 1158)"
+            # position of unexpected character after '"'
+            print (e)
+            print (re.findall(r'\(char(\d+)\)', str(e)))
+            #unexp = int(re.findall(r'\(char (\d+)\)', str(e))[0])
+            ## position of unescaped '"' before that
+            #unesc = i.rfind(r'"', 0, unexp)
+            #i = i[:unesc] + r'\"' + i[unesc+1:]
+            ## position of correspondig closing '"' (+2 for inserted '\')
+            #closg = i.find(r'"', unesc + 2)
+            #i = i[:closg] + r'\"' + i[closg+1:]
+
+>>>>>>> parent of f3ef3f2 (Update test.py)
 
 
 print (numHTML)
