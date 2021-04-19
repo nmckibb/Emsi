@@ -114,8 +114,9 @@ def procJobFile(InputFile, dmos,conn, c):
     except Exception as e:
       print (i)
       print (e)
+      print (strOnet)
   
-  print (strSoc5)
+  
   f.close()
   return numHTML
 
@@ -139,7 +140,7 @@ numHTML = procJobFile("sample", dmos, conn, c)
 print (numHTML)
 
 conn.commit()
-print (get_posting(c)[1])
+#print (get_posting(c)[1])
 
 
 conn.close()
