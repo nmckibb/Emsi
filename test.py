@@ -51,7 +51,6 @@ def CreateTable(conn):
   return c
 
 
-<<<<<<< HEAD
 def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
     #print (strSQL)
@@ -61,13 +60,13 @@ def get_posting(c):
     strSQL ="""SELECT * FROM tblJobPosting"""
     c.execute(strSQL)
     return c.fetchall()
-=======
+
+
 def insert_jobposting(conn, c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="""INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
     print (strSQL)
     c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
->>>>>>> parent of f3ef3f2 (Update test.py)
 
 def findObject(self, attr, value):
   if getattr(self, attr) == value:
@@ -143,7 +142,6 @@ f = open("sample", "r")
   
 #print(f.readline())
 for i in f:
-<<<<<<< HEAD
   data = ast.literal_eval(i)
   #data = json.dumps(data)
   strBody = data["body"]
@@ -162,7 +160,7 @@ for i in f:
   
   conn.commit()
   #print (strSoc5)
-=======
+
   #while True:
   try:
             data = ast.literal_eval(i)
@@ -200,7 +198,7 @@ for i in f:
             #closg = i.find(r'"', unesc + 2)
             #i = i[:closg] + r'\"' + i[closg+1:]
 
->>>>>>> parent of f3ef3f2 (Update test.py)
+
 
 
 print (numHTML)
