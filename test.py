@@ -93,6 +93,7 @@ def procJobFile(InputFile, dmos,conn, c):
   f = open(InputFile, "r")
   
   for i in f:
+    i.strip()
     try:
       data = ast.literal_eval(i)
       #data = json.dumps(data)
