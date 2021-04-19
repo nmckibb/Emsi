@@ -131,7 +131,7 @@ dmos= getOnetMap("map_onet_soc.csv")
 # dimesion varible
 numHTML = 0
 # Opening JSON file
-f = open(InputFile, "r")
+f = open("sample", "r")
   
 #print(f.readline())
 for i in f:
