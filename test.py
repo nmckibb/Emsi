@@ -101,22 +101,26 @@ def procJobFile(InputFile, dmos):
   
   #print(f.readline())
   for i in f:
-    data = ast.literal_eval(i)
-    #data = json.dumps(data)
-    strBody = data["body"]
-    if bool(BeautifulSoup(strBody,"html.parser").find()):
-      strBody = BeautifulSoup(strBody,"lxml").txt
-      numHTML+=1
-    strTitle = data["title"]
-    dtExpired = data["expired"]
-    dtPosted = data["posted"]
-    strState = data["state"]
-    strCity = data["city"]
-    strOnet = data["onet"]
-    strSoc5 = dmos[data["onet"]]
-    strSoc2 = "soc2"
-    insert_jobposting (strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
-    conn.commit()
+    try:
+      data = ast.literal_eval(i)
+      #data = json.dumps(data)
+      strBody = data["body"]
+      if bool(BeautifulSoup(strBody,"html.parser").find()):
+        strBody = BeautifulSoup(strBody,"lxml").txt
+        numHTML+=1
+      strTitle = data["title"]
+      dtExpired = data["expired"]
+      dtPosted = data["posted"]
+      strState = data["state"]
+      strCity = data["city"]
+      strOnet = data["onet"]
+      strSoc5 = dmos[data["onet"]]
+      strSoc2 = "soc2"
+      insert_jobposting (strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+      conn.commit()
+    except Exception as e:
+      PRINT (i)
+      print (e)
     print (strSoc5)
   #return numHTML
 
