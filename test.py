@@ -21,52 +21,45 @@ def getOnetMap(strFileName):
   osf.close()
   return tdmos
 
-#def createDB (mydbfile):
-if os.path.exists('mysqlEmsi.db'):
-    os.remove('mysqlEmsi.db')
+def createDB (mydbfile):
+  if os.path.exists(mydbfile):
+    os.remove(mydbfile)
 
-conn = sqlite3.connect('mysqlEmsi.db')
-#  return conn
+  conn = sqlite3.connect(mydbfile)
+  return conn
 
-#def CreateTable():
-c = conn.cursor()
+def CreateTable(conn):
+  c = conn.cursor()
 
-c.execute("""CREATE TABLE tblJobPosting (
-  body TEXT,
-  title TEXT,
-  expired DATE,
-  posted DATE,
-  state TEXT,
-  city TEXT,
-  onet TEXT,
-  soc5 TEXT,
-  soc2 TEXT
-  )""")
+  c.execute("""CREATE TABLE tblJobPosting (
+    body TEXT,
+    title TEXT,
+    expired DATE,
+    posted DATE,
+    state TEXT,
+    city TEXT,
+    onet TEXT,
+    soc5 TEXT,
+    soc2 TEXT
+    )""")
   
-c.execute("""CREATE TABLE tblonet_soc (
+  c.execute("""CREATE TABLE tblonet_soc (
         onet TEXT,
         soc5 TEXT
         )""")
-conn.commit()
-#return c
+  conn.commit()
+return c
 
 
-def insert_jobposting(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
+def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
     strSQL ="INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
     #print (strSQL)
     c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
 
-def get_posting():
+def get_posting(c):
   strSQL ="""SELECT * FROM tblJobPosting"""
   c.execute(strSQL)
   return c.fetchall()
-
-
-# def insert_jobposting( c, strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2):
-  # strSQL ="""INSERT INTO tblJobPosting (body, title, expired, posted, state, city, onet, soc5, soc2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
-  # #print (strSQL)
-   # c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
-
 
 def findObject(self, attr, value):
   if getattr(self, attr) == value:
@@ -93,7 +86,7 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
   
-def procJobFile(InputFile, dmos):
+def procJobFile(InputFile, dmos,conn, c):
   # dimesion varible
   numHTML = 0
   # Opening JSON file
@@ -115,7 +108,7 @@ def procJobFile(InputFile, dmos):
       strOnet = data["onet"]
       strSoc5 = dmos[data["onet"]]
       strSoc2 = "soc2"
-      insert_jobposting (strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+      insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
       conn.commit()
     except Exception as e:
       print (i)
@@ -123,12 +116,12 @@ def procJobFile(InputFile, dmos):
   
   print (strSoc5)
   f.close()
-  #return numHTML
+  return numHTML
 
 
 # create db and tables
-#conn = createDB('mysqlEmsi.db')
-#c = CreateTable()
+conn = createDB('mysqlEmsi.db')
+c = CreateTable()
 
 #dictionary for mapping to soc5
 dmos= getOnetMap("map_onet_soc.csv")
@@ -137,13 +130,10 @@ dmos= getOnetMap("map_onet_soc.csv")
 #dsh = getSocHierarchy("getSocHierarchy")
 
 #process job posting file
-#NumProc = procJobFile ("sample", dmos, conn, c)
 #procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
 
 # dimesion varible
-numHTML = 0
-
-procJobFile("sample", dmos)
+numHTML = procJobFile("sample", dmos, conn, c)
 
 print (numHTML)
 
