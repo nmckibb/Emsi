@@ -119,7 +119,7 @@ def procJobFile(InputFile, dmos):
       insert_jobposting (strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
       conn.commit()
     except Exception as e:
-      PRINT (i)
+      print (i)
       print (e)
     print (strSoc5)
   #return numHTML
