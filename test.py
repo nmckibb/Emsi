@@ -111,7 +111,7 @@ def procJobFile(InputFile, dmos,conn, c):
       strSoc5 = dmos[data["onet"]]
       strSoc2 = "soc2"
       print ("Before")
-      insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+      insert_jobposting (c, strBody.strip(), strTitle.strip(), dtExpired.strip(), dtPosted.strip(), strState.strip(), strCity.strip(), strOnet.strip(), strSoc5.strip(), strSoc2.strip())
       print("After")
       conn.commit()
     except Exception as e:
