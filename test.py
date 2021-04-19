@@ -155,7 +155,6 @@ for i in f:
   #print (strSoc5)
 
 
-
 print (numHTML)
 
 conn.commit()
