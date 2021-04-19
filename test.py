@@ -6,17 +6,25 @@ from bs4 import BeautifulSoup
 
 numHTML=0
 
-#dimision empty dictionary
-dmos={}
-#setup map onet soc data dictionary
-osf = open("map_onet_soc.csv","r")
-for i in osf:
-    lstx = i.split(",")
-    ti = '{"'+lstx[0]+'": "'+lstx[1].strip()+'"}'
-    if "onet" not in i:
-      dmos.update(ast.literal_eval(ti))
-osf.close()
 
+def getOnetMap(strFileName):
+  tdmos{}
+  #setup map onet soc data dictionary
+  osf = open(strFileName,"r")
+  # process records
+  for i in osf:
+    # split on , to prep for dictionary
+    lstx = i.split(",")
+    # add in " : etc to place in dictionary
+    ti = '{"'+lstx[0]+'": "'+lstx[1].strip()+'"}'
+    # ingore heading row
+    if "onet" not in i:
+      tdmos.update(ast.literal_eval(ti))
+  osf.close()
+  return tdmos
+
+#dimision empty dictionary for mapping to soc5
+dmos= getOnetMap("map_onet_soc.csv")
 
 # diminsion dictionary for soc_hiearchy
 #dsh={}
