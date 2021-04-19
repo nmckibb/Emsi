@@ -86,32 +86,32 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
   
-def procJobFile(InputFile, dmos, conn, c):
-  # dimesion varible
-  numHTML = 0
-  # Opening JSON file
-  f = open(InputFile, "r")
+# def procJobFile(InputFile, dmos, conn, c):
+  # # dimesion varible
+  # numHTML = 0
+  # # Opening JSON file
+  # f = open(InputFile, "r")
   
-  #print(f.readline())
-  for i in f:
-    data = ast.literal_eval(i)
-    #data = json.dumps(data)
-    strBody = data["body"]
-    if bool(BeautifulSoup(strBody,"html.parser").find()):
-      strBody = BeautifulSoup(strBody,"lxml").txt
-      numHTML+=1
-    strTitle = data["title"]
-    dtExpired = data["expired"]
-    dtPosted = data["posted"]
-    strState = data["state"]
-    strCity = data["city"]
-    strOnet = data["onet"]
-    strSoc5 = dmos[data["onet"]]
-    strSoc2 = "soc2"
-    insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
-    conn.commit()
-    print (strSoc5)
-  return numHTML
+  # #print(f.readline())
+  # for i in f:
+    # data = ast.literal_eval(i)
+    # #data = json.dumps(data)
+    # strBody = data["body"]
+    # if bool(BeautifulSoup(strBody,"html.parser").find()):
+      # strBody = BeautifulSoup(strBody,"lxml").txt
+      # numHTML+=1
+    # strTitle = data["title"]
+    # dtExpired = data["expired"]
+    # dtPosted = data["posted"]
+    # strState = data["state"]
+    # strCity = data["city"]
+    # strOnet = data["onet"]
+    # strSoc5 = dmos[data["onet"]]
+    # strSoc2 = "soc2"
+    # insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
+    # conn.commit()
+    # #print (strSoc5)
+  # return numHTML
 
 
 # create db and tables
@@ -125,9 +125,37 @@ dmos= getOnetMap("map_onet_soc.csv")
 #dsh = getSocHierarchy("getSocHierarchy")
 
 #process job posting file
-NumProc = procJobFile ("sample", dmos, conn, c)
+#NumProc = procJobFile ("sample", dmos, conn, c)
 #procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
-print (NumProc)
+
+# dimesion varible
+numHTML = 0
+# Opening JSON file
+f = open(InputFile, "r")
+  
+#print(f.readline())
+for i in f:
+  data = ast.literal_eval(i)
+  #data = json.dumps(data)
+  strBody = data["body"]
+  if bool(BeautifulSoup(strBody,"html.parser").find()):
+    strBody = BeautifulSoup(strBody,"lxml").txt
+    numHTML+=1
+  strTitle = data["title"]
+  dtExpired = data["expired"]
+  dtPosted = data["posted"]
+  strState = data["state"]
+  strCity = data["city"]
+  strOnet = data["onet"]
+  strSoc5 = dmos[data["onet"]]
+  strSoc2 = "soc2"
+  insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted,strState, strCity, strOnet, strSoc5, strSoc2)
+  conn.commit()
+  #print (strSoc5)
+
+
+
+print (numHTML)
 
 conn.commit()
 print get_posting(c)[1]
