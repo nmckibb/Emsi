@@ -160,7 +160,7 @@ f = open("Sumary.txt", "w")
 
 f.writelines("Count of documents for each `soc2`:")
 print("Count of documents for each `soc2`:")
-f.writelines(get_count_of_soc2(c))
+f.writelines(str(get_count_of_soc2(c)))
 print(get_count_of_soc2(c))
 
 f.writelines("Number of documents from which you successfully removed HTML tags:" + str(numHTML))
@@ -169,7 +169,7 @@ print (" Number of documents from which you successfully removed HTML tags:" + s
 f.writelines("Total number of postings that were active on February 1st, 2017: " )
 print ("Total number of postings that were active on February 1st, 2017: " )
 
-f.writelines(get_count_ActiveRecord(c))
+f.writelines(str(get_count_ActiveRecord(c)))
 print(get_count_ActiveRecord(c))
 
 
