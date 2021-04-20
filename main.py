@@ -8,7 +8,7 @@ conn = sqlite3.connect('mysqlEmsi.db')
 c = conn.cursor()
 
 def get_posting(c):
-  strSQL ="""SELECT * FROM tblJobPosting"""
+  strSQL ="""SELECT count(soc2) FROM tblJobPosting"""
   c.execute(strSQL)
   return c.fetchall()
 
@@ -18,11 +18,13 @@ def get_count_of_soc2(c):
   return c.fetchall()
 
 def get_count_ActiveRecord(c):
-  strSQL ="""SELECT count(soc2) WHERE expired=>'2017-02-01' and posted<='2017-02-01' FROM tblJobPosting"""
+  strSQL ="""SELECT top 10 expired,posted FROM tblJobPosting"""
+#  WHERE expired => '2017-02-01' and posted <= '2017-02-01'
   c.execute(strSQL)
   return c.fetchall()
 
 
 print(get_count_of_soc2(c))
 print(get_count_ActiveRecord(c))
+print (get_posting(c))
 conn.close()
