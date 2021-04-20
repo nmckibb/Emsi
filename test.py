@@ -158,24 +158,20 @@ numHTML = procJobFile("../data_engineer_technical_project/sample",dmos,conn,c,ds
 # sumary of process
 f = open("Sumary.txt", "w")
 
-f.write("Count of documents for each `soc2`:")
+f.writelines("Count of documents for each `soc2`:")
 print("Count of documents for each `soc2`:")
-for x in get_count_of_soc2(c): 
-  print (type (x))
-  f.write(str(x))
-  print(str(x))
+f.writelines(get_count_of_soc2(c))
+print(get_count_of_soc2(c))
 
-f.write("Number of documents from which you successfully removed HTML tags:" + str(numHTML))
+f.writelines("Number of documents from which you successfully removed HTML tags:" + str(numHTML))
 print (" Number of documents from which you successfully removed HTML tags:" + str(numHTML))
 
-f.write("Total number of postings that were active on February 1st, 2017: " )
+f.writelines("Total number of postings that were active on February 1st, 2017: " )
 print ("Total number of postings that were active on February 1st, 2017: " )
 
-for x in get_count_ActiveRecord(c): 
-  print (type (x))
-  f.write(str(x))
-  print(str(x))
-  
+f.writelines(get_count_ActiveRecord(c))
+print(get_count_ActiveRecord(c))
+
 
 # close and exit
 f.close()
