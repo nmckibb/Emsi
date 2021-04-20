@@ -95,11 +95,14 @@ def getSocHierarchy(strFileName):
 def procJobFile(InputFile, dmos,conn, c, dsh):
   # dimesion varible
   numHTML = 0
+  numRecords = 0
   # Opening JSON file
   f = open(InputFile, "r")
   
   for i in f:
     i.strip()
+    if math.fmod(numRecords, 1000)=0:
+      print ("Records Processed " + numRecords)
     try:
       data = ast.literal_eval(i)
       #data = json.dumps(data)
@@ -122,11 +125,12 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       strSoc2 = dsh[strSoc5]
       insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
       conn.commit()
+      
     except Exception as e:
       print (i)
       print (e)
       print (strOnet)
-  
+    numRecords+=1
   
   f.close()
   return numHTML
@@ -143,7 +147,7 @@ dmos= getOnetMap("map_onet_soc.csv")
 dsh = getSocHierarchy('../data_engineer_technical_project/soc_hierarchy.csv')
 
 #process job posting file
-#procJobFile("../data_engineer_technical_project/sample",dmos,conn,c)
+#numHTML = procJobFile("../data_engineer_technical_project/sample",dmos,conn,c,dsh)
 
 # dimesion varible
 numHTML = procJobFile("sample", dmos, conn, c, dsh)
