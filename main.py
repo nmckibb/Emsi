@@ -21,3 +21,8 @@ def get_count_ActiveRecord(c):
   strSQL ="""SELECT count(soc2) WHERE expired=>'2017-02-01' and posted<='2017-02-01' FROM tblJobPosting"""
   c.execute(strSQL)
   return c.fetchall()
+
+
+print(get_count_of_soc2(c))
+print(get_count_of_soc2(c))
+conn.close()
