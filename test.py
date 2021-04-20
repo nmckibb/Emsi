@@ -114,11 +114,11 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       #data = json.dumps(data)
       strOBody = data["body"]
       #if bool(BeautifulSoup(strOBody,"html.parser").find()):
-      strCBody = BeautifulSoup(strOBody,"lxml").txt
+      strCBody = BeautifulSoup(strOBody,"lxml").get_text
       if strOBody == strCBody:
-        strBody = strOBody
+        strBody = str(strOBody)
       else:
-        strBody = strCBody
+        strBody = str(strCBody)
         numHTML+=1
       
       strTitle = data["title"]
@@ -129,7 +129,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       strOnet = data["onet"]
       strSoc5 = dmos[data["onet"]]
       strSoc2 = dsh[strSoc5]
-      insert_jobposting (c, str(strBody), str(strTitle), dtExpired, dtPosted, str(strState), str(strCity), str(strOnet), str(strSoc5), str(strSoc2))
+      insert_jobposting (c, strBody, str(strTitle), dtExpired, dtPosted, str(strState), str(strCity), str(strOnet), str(strSoc5), str(strSoc2))
       conn.commit()
     except Exception as e:
       print (i)
