@@ -101,7 +101,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
   
   for i in f:
     i.strip()
-    if math.fmod(numRecords, 1000)=0:
+    if math.fmod(numRecords, 2)=0:
       print ("Records Processed " + numRecords)
     try:
       data = ast.literal_eval(i)
