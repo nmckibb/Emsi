@@ -134,7 +134,6 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     except Exception as e:
       print (i)
       print (e)
-      print (strOnet)
     numRecords+=1
   
   f.close()
