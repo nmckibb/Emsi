@@ -18,7 +18,7 @@ def get_count_of_soc2(c):
   return c.fetchall()
 
 def get_count_ActiveRecord(c):
-  strSQL ="""SELECT top 10 expired,posted FROM tblJobPosting"""
+  strSQL ="""SELECT top expired,posted FROM tblJobPosting"""
 #  WHERE expired => '2017-02-01' and posted <= '2017-02-01'
   c.execute(strSQL)
   return c.fetchall()
