@@ -161,6 +161,7 @@ f = open("Sumary.txt", "w")
 f.write("Count of documents for each `soc2`:")
 print("Count of documents for each `soc2`:")
 for x in get_count_of_soc2(c): 
+  print (type (x))
   f.write(x)
   print(x)
 
@@ -171,6 +172,7 @@ f.write("Total number of postings that were active on February 1st, 2017: " )
 print ("Total number of postings that were active on February 1st, 2017: " )
 
 for x in get_count_ActiveRecord(c): 
+  print (type (x))
   f.write(x)
   print(x)
   
