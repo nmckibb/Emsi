@@ -98,18 +98,7 @@ def getSocHierarchy(strFileName):
   osf.close()
   return tdmos
 # Function to remove tags
-def remove_tags(html):
-  
-    # parse html content
-    soup = BeautifulSoup(html, "html.parser")
-  
-    for data in soup(['style', 'script']):
-        # Remove tags
-        data.decompose()
-  
-    # return data by retrieving the tag content
-    return ' '.join(soup.stripped_strings)
-    
+
 def procJobFile(InputFile, dmos,conn, c, dsh):
   # dimesion varible
   numHTML = 0
@@ -126,7 +115,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       #data = json.dumps(data)
       strOBody = data["body"]
       #if bool(BeautifulSoup(strOBody,"html.parser").find()):
-      strCBody = remove_tags(strOBody)
+      strCBody = BeautifulSoup(strOBody).text‍‍‍‍
       if strOBody == strCBody:
         strBody = str(strOBody)
       else:
