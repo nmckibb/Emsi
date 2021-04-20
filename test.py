@@ -106,7 +106,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       strOBody = data["body"]
       #if bool(BeautifulSoup(strBody,"html.parser").find()):
       strCBody = BeautifulSoup(strBody,"lxml").txt
-      if strOBody eq strCBody:
+      if strOBody == strCBody:
         strBody = strOBody
       Else:
         strBody = strCBody
