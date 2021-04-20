@@ -101,7 +101,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
   
   for i in f:
     i.strip()
-    if math.fmod(numRecords, 2)==0:
+    if math.fmod(numRecords, 2000)==0:
       print ("Records Processed : " + str(numRecords))
     try:
       data = ast.literal_eval(i)
@@ -133,6 +133,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     numRecords+=1
   
   f.close()
+  print ("Records Processed : " + str(numRecords))
   return numHTML
 
 
@@ -147,10 +148,10 @@ dmos= getOnetMap("map_onet_soc.csv")
 dsh = getSocHierarchy('../data_engineer_technical_project/soc_hierarchy.csv')
 
 #process job posting file
-#numHTML = procJobFile("../data_engineer_technical_project/sample",dmos,conn,c,dsh)
+numHTML = procJobFile("../data_engineer_technical_project/sample",dmos,conn,c,dsh)
 
 # dimesion varible
-numHTML = procJobFile("sample", dmos, conn, c, dsh)
+#numHTML = procJobFile("sample", dmos, conn, c, dsh)
 
 #print (dsh)
 print (numHTML)
