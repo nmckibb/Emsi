@@ -1,33 +1,23 @@
 
 # Python program to read
-# json file
+import json, ast, re, bs4, datetime, io, sqlite3, os, math
+from bs4 import BeautifulSoup
+from sqlite3 import Error
 
-import json, re
+conn = sqlite3.connect('mysqlEmsi.db')
+c = conn.cursor()
 
-# Opening JSON file
+def get_posting(c):
+  strSQL ="""SELECT * FROM tblJobPosting"""
+  c.execute(strSQL)
+  return c.fetchall()
 
-f = open('sample1.json',)
-print(f)
-# returns JSON object as
-# a dictionary
+def get_count_of_soc2(c):
+  strSQL ="""SELECT soc2,count(soc2) FROM tblJobPosting GROUP BY soc2"""
+  c.execute(strSQL)
+  return c.fetchall()
 
-#while True:
-try:
-  data = json.load(f)
-  for i in data['body']:
-      print(i)
-
-  #result = json.loads(s)   # try to parse...
-#           break                    # parsing worked -> exit loop
-except Exception as e:
-   # "Expecting , delimiter: line 34 column 54 (char 1158)"
-   # position of unexpected character after '"'
-  unexp = int(re.findall(r'\(char (\d+)\)', str(e))[0])
-  print (unexp)
-  # position of unescaped '"' before that
-#  unesc = f.find(r'"', 0, unexp)
-#           f = f[:unesc] + r'\"' + f[unesc+1:]
-           # position of correspondig closing '"' (+2 for inserted '\')
-#           closg = f.find(r'"', unesc + 2)
-#           f = f[:closg] + r'\"' + f[closg+1:]
-f.close()
+def get_count_ActiveRecord(c):
+  strSQL ="""SELECT count(soc2) WHERE expired=>'2017-02-01' and posted<='2017-02-01' FROM tblJobPosting"""
+  c.execute(strSQL)
+  return c.fetchall()
