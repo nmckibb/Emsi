@@ -24,5 +24,5 @@ def get_count_ActiveRecord(c):
 
 
 print(get_count_of_soc2(c))
-print(get_count_of_soc2(c))
+print(get_count_ActiveRecord(c))
 conn.close()
