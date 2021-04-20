@@ -65,14 +65,20 @@ def get_posting(c):
   c.execute(strSQL)
   return c.fetchall()
 
-def findObject(self, attr, value):
-  if getattr(self, attr) == value:
-    return self
-  else:
-    for child in self.children:
-      match = child.findObject(attr, value)
-      if match:
-        return match
+def get_posting_count(c):
+  strSQL ="""SELECT count(*) FROM tblJobPosting"""
+  c.execute(strSQL)
+  return c.fetchall()
+
+def get_count_of_soc2(c):
+  strSQL ="""SELECT soc2,count(*) FROM tblJobPosting GROUP BY soc2"""
+  c.execute(strSQL)
+  return c.fetchall()
+
+def get_count_ActiveRecord(c):
+  strSQL ="""SELECT count(*) FROM tblJobPosting  WHERE expired > '2017-02-01' and posted < '2017-02-02'"""
+  c.execute(strSQL)
+  return c.fetchall()
 
 def getSocHierarchy(strFileName):
   #child,parent,level,name
@@ -125,7 +131,6 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       strSoc2 = dsh[strSoc5]
       insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
       conn.commit()
-      
     except Exception as e:
       print (i)
       print (e)
@@ -150,14 +155,23 @@ dsh = getSocHierarchy('../data_engineer_technical_project/soc_hierarchy.csv')
 #process job posting file
 numHTML = procJobFile("../data_engineer_technical_project/sample",dmos,conn,c,dsh)
 
-# dimesion varible
-#numHTML = procJobFile("sample", dmos, conn, c, dsh)
 
-#print (dsh)
-print (numHTML)
+# sumary of process
+f = open("Sumary.txt", "w")
 
+f.write("Count of documents for each `soc2`:")
+print("Count of documents for each `soc2`:")
+f.write(get_count_of_soc2(c))
+print(get_count_of_soc2(c))
+
+f.write("Number of documents from which you successfully removed HTML tags:" + str(numHTML))
+print (" Number of documents from which you successfully removed HTML tags:" + str(numHTML))
+
+f.write("Total number of postings that were active on February 1st, 2017: " + str(get_count_ActiveRecord(c)))
+print ("Total number of postings that were active on February 1st, 2017: " + str(get_count_ActiveRecord(c)))
+print(get_count_ActiveRecord(c))
+f.close()
+
+# close and exit
 conn.commit()
-print (get_posting(c)[1])
-
-
 conn.close()
