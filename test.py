@@ -129,7 +129,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       strOnet = data["onet"]
       strSoc5 = dmos[data["onet"]]
       strSoc2 = dsh[strSoc5]
-      insert_jobposting (c, strBody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
+      insert_jobposting (c, strBody.encode(), strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2)
       conn.commit()
     except Exception as e:
       print (i)
@@ -162,8 +162,8 @@ f.write("Count of documents for each `soc2`:")
 print("Count of documents for each `soc2`:")
 for x in get_count_of_soc2(c): 
   print (type (x))
-  f.write(x)
-  print(x)
+  f.write(str(x))
+  print(str(x))
 
 f.write("Number of documents from which you successfully removed HTML tags:" + str(numHTML))
 print (" Number of documents from which you successfully removed HTML tags:" + str(numHTML))
@@ -173,8 +173,8 @@ print ("Total number of postings that were active on February 1st, 2017: " )
 
 for x in get_count_ActiveRecord(c): 
   print (type (x))
-  f.write(x)
-  print(x)
+  f.write(str(x))
+  print(str(x))
   
 
 # close and exit
