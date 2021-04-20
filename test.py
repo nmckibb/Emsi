@@ -108,7 +108,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       strCBody = BeautifulSoup(strBody,"lxml").txt
       if strOBody == strCBody:
         strBody = strOBody
-      Else:
+      else:
         strBody = strCBody
         numHTML+=1
       
