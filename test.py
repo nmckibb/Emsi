@@ -102,7 +102,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
   for i in f:
     i.strip()
     if math.fmod(numRecords, 2)==0:
-      print ("Records Processed " + numRecords)
+      print ("Records Processed " & numRecords)
     try:
       data = ast.literal_eval(i)
       #data = json.dumps(data)
