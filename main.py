@@ -115,7 +115,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       #data = json.dumps(data)
       strOBody = data["body"]
       #if bool(BeautifulSoup(strOBody,"html.parser").find()):
-      strCBody = BeautifulSoup(strOBody,"lxml").get_text
+      strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
       if strOBody == strCBody:
         strBody = str(strOBody)
       else:
