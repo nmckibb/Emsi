@@ -120,7 +120,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       if strOBody == strCBody:
         strBody = str(strOBody)
       else:
-        strBody = str(strCBody).encode()
+        strBody = str(strCBody).encode("utf-8", "ignore")
         numHTML+=1
       
       strTitle = data["title"]
