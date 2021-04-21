@@ -120,8 +120,12 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       if strOBody == strCBody:
         strBody = strOBody
       else:
+<<<<<<< HEAD
         #strBody = str(strCBody).encode("utf-8", "ignore")
         strBody = strCBody
+=======
+        strBody = str(strCBody)
+>>>>>>> parent of a22a8c5 (Update main.py)
         numHTML+=1
       
       strTitle = data["title"]
