@@ -113,13 +113,13 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     try:
       data = ast.literal_eval(i)
       #data = json.dumps(data)
-      strOBody = data["body"]
+      strOBody = strBody.encode(str(data["body"]), "utf-8", "replace")
       #if bool(BeautifulSoup(strOBody,"html.parser").find()):
       strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
       if strOBody == strCBody:
         strBody = str(strOBody)
       else:
-        strBody = strBody.encode(str(strCBody), "utf-8", "replace")
+        strBody = str(strOBody)
         numHTML+=1
       
       strTitle = data["title"]
