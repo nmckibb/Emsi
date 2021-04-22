@@ -1,5 +1,5 @@
 # Introduction
-The purpose of this project i to process sample data and place the reuslts in SQLite dabase.
+The purpose of this project is to process sample data and place the results in SQLite database.
 
 # Project Story
 
@@ -25,5 +25,9 @@ install steps are https://lxml.de/installation.html
 * Create a repository on Github and email us a link.
 * The repository should include a README.md that clearly describes how to compile and run your code.
 
-At the linux propmt in the directory of the main.py and sample.
-python main.py
+At the Linux prompt in the directory of the main.py and sample.
+python main.py 
+
+Assumption:
+
+If there is not a match for SOC2 or SOC5 placed text No Match in Soc2 or soc5 field values
