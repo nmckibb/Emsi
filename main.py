@@ -117,30 +117,25 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       print ("Records Processed : " + str(numRecords))
     
     data = ast.literal_eval(i)
-    print ("ast.literal")
     #data = json.dumps(data)
     strOBody = str(data["body"]).encode() # "ascii",errors='ignore'
-    print ("encode")
     #strOBody = data["body"]
     #if bool(BeautifulSoup(strOBody,"html.parser").find()):
-      strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
-      print ("BeautifulSoup")
-      if strOBody == strCBody:
-        strBody = strOBody
-      else:
-        #strBody = str(strCBody).encode("utf-8", "ignore")
-        #strBody = strCBody
-        strBody = strCBody
-        numHTML+=1
-      
-      print ("Body")
-      strTitle = data["title"]
-      dtExpired = data["expired"]
-      dtPosted = data["posted"]
-      strState = data["state"]
-      strCity = data["city"]
-      strOnet = data["onet"]
-      print ("onet")
+    strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
+    print ("BeautifulSoup")
+    if strOBody == strCBody:
+      strBody = strOBody
+    else:
+      #strBody = str(strCBody).encode("utf-8", "ignore")
+      #strBody = strCBody
+      strBody = strCBody
+      numHTML+=1
+    strTitle = data["title"]
+    dtExpired = data["expired"]
+    dtPosted = data["posted"]
+    strState = data["state"]
+    strCity = data["city"]
+    strOnet = data["onet"]
     try:
       strSoc5 = dmos[data["onet"]]
     except Exception as e:
