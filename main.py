@@ -118,7 +118,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     try:
       data = ast.literal_eval(i)
       #data = json.dumps(data)
-      strOBody = str(strip_non_ascii(data["body"]).encode( "ascii", "ignore"))
+      strOBody = str(strip_non_ascii(data["body"]).encode( "ascii",errors='ignore'))
       #strOBody = data["body"]
       #if bool(BeautifulSoup(strOBody,"html.parser").find()):
       strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
