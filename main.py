@@ -58,7 +58,8 @@ def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCi
       c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
     except Exception as e:
       print(e)
-      print ("Insert Record")
+      
+      print ("Insert Record  "+strSoc5+ strSoc2)
 
 def get_posting(c):
   strSQL ="""SELECT * FROM tblJobPosting"""
