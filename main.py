@@ -122,7 +122,9 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     strOBody = str(data["body"]).encode() # "ascii",errors='ignore'
     #strOBody = data["body"]
     #if bool(BeautifulSoup(strOBody,"html.parser").find()):
-    strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
+    print (strOBody)
+    strCBody = BeautifulSoup(strOBody,"lxml").text
+    print (strCBody)
     print ("BeautifulSoup")
     if strOBody == strCBody:
       strBody = strOBody
