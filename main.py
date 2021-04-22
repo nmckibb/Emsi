@@ -115,14 +115,14 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     i = strip_non_ascii(i.strip())
     if math.fmod(numRecords, 2000)==0:
       print ("Records Processed : " + str(numRecords))
-    try:
-      data = ast.literal_eval(i)
-      print ("ast.literal")
-      #data = json.dumps(data)
-      strOBody = str(data["body"]).encode() # "ascii",errors='ignore'
-      print ("encode")
-      #strOBody = data["body"]
-      #if bool(BeautifulSoup(strOBody,"html.parser").find()):
+    
+    data = ast.literal_eval(i)
+    print ("ast.literal")
+    #data = json.dumps(data)
+    strOBody = str(data["body"]).encode() # "ascii",errors='ignore'
+    print ("encode")
+    #strOBody = data["body"]
+    #if bool(BeautifulSoup(strOBody,"html.parser").find()):
       strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
       print ("BeautifulSoup")
       if strOBody == strCBody:
@@ -130,24 +130,27 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       else:
         #strBody = str(strCBody).encode("utf-8", "ignore")
         #strBody = strCBody
-        strBody = str(strCBody)
+        strBody = strCBody
         numHTML+=1
       
+      print ("Body")
       strTitle = data["title"]
       dtExpired = data["expired"]
       dtPosted = data["posted"]
       strState = data["state"]
       strCity = data["city"]
       strOnet = data["onet"]
+      print ("onet")
+    try:
       strSoc5 = dmos[data["onet"]]
-      strSoc2 = dsh[strSoc5]
-      insert_jobposting (c, strBody, str(strTitle), dtExpired, dtPosted, str(strState), str(strCity), str(strOnet), str(strSoc5), str(strSoc2))
-      conn.commit()
-      print ("commit")
     except Exception as e:
-      print (e)
-      print (i)
-      print ("Prep Record")
+      strSoc5 = ""
+    try:
+      strSoc2 = dsh[strSoc5]
+    except Exception as e:
+      strSoc2 = ""
+    insert_jobposting (c, strBody, str(strTitle), dtExpired, dtPosted, str(strState), str(strCity), str(strOnet), str(strSoc5), str(strSoc2))
+    conn.commit()
     numRecords+=1
   
   f.close()
