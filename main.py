@@ -117,11 +117,14 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       print ("Records Processed : " + str(numRecords))
     try:
       data = ast.literal_eval(i)
+      print ("ast.literal")
       #data = json.dumps(data)
       strOBody = str(data["body"]).encode() # "ascii",errors='ignore'
+      print ("encode")
       #strOBody = data["body"]
       #if bool(BeautifulSoup(strOBody,"html.parser").find()):
       strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
+      print ("BeautifulSoup")
       if strOBody == strCBody:
         strBody = strOBody
       else:
@@ -140,6 +143,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       strSoc2 = dsh[strSoc5]
       insert_jobposting (c, strBody, str(strTitle), dtExpired, dtPosted, str(strState), str(strCity), str(strOnet), str(strSoc5), str(strSoc2))
       conn.commit()
+      print ("commit")
     except Exception as e:
       print (e)
       print (i)
