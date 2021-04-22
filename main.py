@@ -59,7 +59,7 @@ def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCi
     except Exception as e:
       print(e)
       
-      print ("Insert Record  "+strbody+strSoc5+ strSoc2)
+      print ("Insert Record  "+ strbody + strSoc5 + strSoc2)
 
 def get_posting(c):
   strSQL ="""SELECT * FROM tblJobPosting"""
