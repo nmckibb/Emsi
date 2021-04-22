@@ -99,7 +99,10 @@ def getSocHierarchy(strFileName):
   return tdmos
 # Function to remove tags
 
-
+def strip_non_ascii(string):
+    ''' Returns the string without non ASCII characters'''
+    stripped = (c for c in string if 0 < ord(c) < 127)
+    return ''.join(stripped)
 
 def procJobFile(InputFile, dmos,conn, c, dsh):
   # dimesion varible
@@ -115,7 +118,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     try:
       data = ast.literal_eval(i)
       #data = json.dumps(data)
-      strOBody = str(data["body"]).encode( "ascii", "ignore")
+      strOBody = str(strip_non_ascii(data["body"]).encode( "ascii", "ignore"))
       #strOBody = data["body"]
       #if bool(BeautifulSoup(strOBody,"html.parser").find()):
       strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
