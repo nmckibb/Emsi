@@ -57,7 +57,7 @@ def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCi
     try:
       c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
     except Exception as e:
-      print (strOnet)
+      #print (strOnet)
       print(e)
 
 def get_posting(c):
@@ -141,8 +141,8 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
       insert_jobposting (c, strBody, str(strTitle), dtExpired, dtPosted, str(strState), str(strCity), str(strOnet), str(strSoc5), str(strSoc2))
       conn.commit()
     except Exception as e:
-      print (i)
       print (e)
+      print (i)
     numRecords+=1
   
   f.close()
