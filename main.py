@@ -140,11 +140,11 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     try:
       strSoc5 = dmos[data["onet"]]
     except Exception as e:
-      strSoc5 = " "
+      strSoc5 = "No Match"
     try:
       strSoc2 = dsh[strSoc5]
     except Exception as e:
-      strSoc2 = " "
+      strSoc2 = "No Match"
     insert_jobposting (c, strBody, str(strTitle), dtExpired, dtPosted, str(strState), str(strCity), str(strOnet), str(strSoc5), str(strSoc2))
     conn.commit()
     numRecords+=1
