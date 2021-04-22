@@ -112,13 +112,13 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
   f = open(InputFile, "r")
   
   for i in f:
-    i.strip()
+    i = strip_non_ascii(i.strip())
     if math.fmod(numRecords, 2000)==0:
       print ("Records Processed : " + str(numRecords))
     try:
       data = ast.literal_eval(i)
       #data = json.dumps(data)
-      strOBody = str(strip_non_ascii(data["body"])).encode( "ascii",errors='ignore')
+      strOBody = str(data["body"]).encode() # "ascii",errors='ignore'
       #strOBody = data["body"]
       #if bool(BeautifulSoup(strOBody,"html.parser").find()):
       strCBody = BeautifulSoup(str(strOBody),"lxml").get_text
