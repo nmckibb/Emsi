@@ -57,8 +57,8 @@ def insert_jobposting(c, strbody, strTitle, dtExpired, dtPosted, strState, strCi
     try:
       c.execute(strSQL,(strbody, strTitle, dtExpired, dtPosted, strState, strCity, strOnet, strSoc5, strSoc2))
     except Exception as e:
-      #print (strOnet)
       print(e)
+      print ("Insert Record")
 
 def get_posting(c):
   strSQL ="""SELECT * FROM tblJobPosting"""
@@ -143,6 +143,7 @@ def procJobFile(InputFile, dmos,conn, c, dsh):
     except Exception as e:
       print (e)
       print (i)
+      print ("Prep Record")
     numRecords+=1
   
   f.close()
